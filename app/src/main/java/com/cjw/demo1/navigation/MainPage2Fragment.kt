@@ -26,11 +26,15 @@ class MainPage2Fragment : Fragment() {
         }
 
         bt3.setOnClickListener {
-            Navigation.findNavController(it).popBackStack()
+            Navigation.findNavController(it).navigateUp()
         }
 
         bt4.setOnClickListener {
             activity?.finish()
+        }
+
+        bt5.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action1_mainPage2Fragment_pop_including_mainPage1Fragment)
         }
     }
 }

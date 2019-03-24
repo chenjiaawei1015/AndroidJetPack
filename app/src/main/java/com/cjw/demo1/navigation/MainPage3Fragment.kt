@@ -26,7 +26,7 @@ class MainPage3Fragment : Fragment() {
         }
 
         bt3.setOnClickListener {
-            Navigation.findNavController(it).popBackStack()
+            Navigation.findNavController(it).navigateUp()
         }
 
         bt4.setOnClickListener {
