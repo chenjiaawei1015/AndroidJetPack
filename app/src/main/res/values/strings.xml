@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Demo1</string>
+
+    <string name="title_fragment_page1">当前 Fragment1</string>
+    <string name="title_fragment_page2">当前 Fragment2</string>
+    <string name="title_fragment_page3">当前 Fragment3</string>
+    <string name="navigation_fragment_page1">跳转Fragment1</string>
+    <string name="navigation_fragment_page2">跳转Fragment2</string>
+    <string name="navigation_fragment_page3">跳转Fragment3</string>
+    <string name="navigation_fragment_back">返回上一个 Fragment</string>
+    <string name="navigation_activity_back">Activity 退出</string>
 </resources>
