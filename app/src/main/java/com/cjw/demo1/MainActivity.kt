@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.cjw.demo1.lifecycle.MainLifecycleObserver
 import com.cjw.demo1.logger.Log
 
@@ -40,6 +41,12 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         mActivityLiveData.value = "onCreate"
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        // onSupportNavigateUp()方法的重写,意味着 Activity 将它的 back 键点击事件的委托出去
+        // 如果当前并非栈中顶部的 Fragment, 那么点击 back 键, 返回上一个Fragment
+        return findNavController(R.id.nav_host_fg).navigateUp()
     }
 
     override fun onStart() {
