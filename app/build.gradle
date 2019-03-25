@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -63,11 +65,9 @@ dependencies {
     // implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     // navigation
-    def nav_version = "2.1.0-alpha01"
-
     // implementation "androidx.navigation:navigation-fragment:$nav_version" // For Kotlin use navigation-fragment-ktx
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     // implementation "androidx.navigation:navigation-ui:$nav_version" // For Kotlin use navigation-ui-ktx
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
 }

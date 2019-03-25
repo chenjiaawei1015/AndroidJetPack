@@ -24,10 +24,23 @@
         android:autofillHints="@string/auto_fill_hint_fragment2_et_data"
         android:hint="@string/prompt_input_text"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@id/bt1"
+        app:layout_constraintBottom_toTopOf="@id/et2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+    <EditText
+        android:id="@+id/et2"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_5"
+        android:autofillHints="@string/auto_fill_hint_fragment2_et_data"
+        android:hint="@string/prompt_input_text"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/bt1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et1" />
 
     <Button
         android:id="@+id/bt1"
@@ -39,7 +52,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bt2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et1" />
+        app:layout_constraintTop_toBottomOf="@+id/et2" />
 
     <Button
         android:id="@+id/bt2"

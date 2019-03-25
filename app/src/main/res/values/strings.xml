@@ -10,8 +10,13 @@
     <string name="navigation_fragment_back">返回上一个 Fragment</string>
     <string name="navigation_activity_back">Activity 退出</string>
     <string name="navigation_back_fragment_page1">回到Fragment1</string>
+    <string name="navigation_args_1">传递参数 方式1</string>
+    <string name="navigation_args_2">传递参数 方式2</string>
     <string name="prompt_input_text">文本输入</string>
     <string name="auto_fill_hint_fragment1_et_data">auto_fill_hint_fragment1_et_data</string>
     <string name="auto_fill_hint_fragment2_et_data">auto_fill_hint_fragment2_et_data</string>
+
+    <string name="args_et_text1">args_et_text1</string>
+    <string name="args_et_text2">args_et_text2</string>
 
 </resources>

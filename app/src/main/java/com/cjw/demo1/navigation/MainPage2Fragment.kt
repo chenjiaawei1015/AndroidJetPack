@@ -1,7 +1,6 @@
 package com.cjw.demo1.navigation
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,6 @@ import com.cjw.demo1.R
 import kotlinx.android.synthetic.main.fragment_main_page2.*
 
 class MainPage2Fragment : Fragment() {
-
-    companion object {
-        const val ARGS_ET_TEXT = "args_et_text"
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main_page2, container, false)
@@ -42,9 +37,15 @@ class MainPage2Fragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action1_mainPage2Fragment_pop_including_mainPage1Fragment)
         }
 
-        val textArgs = arguments?.getString(ARGS_ET_TEXT)
-        if (textArgs != null) {
-            et1.setText(textArgs)
+        val text1Args = arguments?.getString(getString(R.string.args_et_text1))
+        if (text1Args != null) {
+            et1.setText(text1Args)
         }
+
+        val text2Args = arguments?.getString(getString(R.string.args_et_text2))
+        if (text2Args != null) {
+            et2.setText(text2Args)
+        }
+
     }
 }

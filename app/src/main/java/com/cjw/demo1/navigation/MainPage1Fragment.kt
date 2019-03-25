@@ -18,9 +18,7 @@ class MainPage1Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bt1.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(MainPage2Fragment.ARGS_ET_TEXT, et1.text.toString())
-            Navigation.findNavController(it).navigate(R.id.action_mainPage1Fragment_to_mainPage2Fragment, bundle)
+            Navigation.findNavController(it).navigate(R.id.action_mainPage1Fragment_to_mainPage2Fragment)
         }
 
         bt2.setOnClickListener {
@@ -33,6 +31,19 @@ class MainPage1Fragment : Fragment() {
 
         bt4.setOnClickListener {
             activity?.finish()
+        }
+
+        bt5.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(getString(R.string.args_et_text1), et1.text.toString())
+            Navigation.findNavController(it).navigate(R.id.action_mainPage1Fragment_to_mainPage2Fragment, bundle)
+        }
+
+        bt6.setOnClickListener {
+            var bundle = Bundle()
+            bundle.putString(getString(R.string.args_et_text2), et1.text.toString())
+            bundle = MainPage1FragmentArgs.fromBundle(bundle).toBundle()
+            Navigation.findNavController(it).navigate(R.id.action_mainPage1Fragment_to_mainPage2Fragment, bundle)
         }
     }
 }
