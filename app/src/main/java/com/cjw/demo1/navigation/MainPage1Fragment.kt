@@ -45,5 +45,8 @@ class MainPage1Fragment : Fragment() {
             bundle = MainPage1FragmentArgs.fromBundle(bundle).toBundle()
             Navigation.findNavController(it).navigate(R.id.action_mainPage1Fragment_to_mainPage2Fragment, bundle)
         }
+
+        val defaultEtData = arguments?.getString(getString(R.string.value_fragment_page1_et_text))
+        et1.setText(defaultEtData)
     }
 }

@@ -1,10 +1,12 @@
 package com.cjw.demo1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.NavArgument
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.cjw.demo1.lifecycle.MainLifecycleObserver
 import com.cjw.demo1.logger.Log
 
@@ -41,6 +43,13 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         mActivityLiveData.value = "onCreate"
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fg) as NavHostFragment
+        val navGraph = navHostFragment.navController.navInflater.inflate(R.navigation.nav_main_fragment_page)
+
+        val navArgument = NavArgument.Builder().setDefaultValue("默认数据").build()
+        navGraph.addArgument(getString(R.string.value_fragment_page1_et_text), navArgument)
+        navHostFragment.navController.graph = navGraph
     }
 
     override fun onSupportNavigateUp(): Boolean {

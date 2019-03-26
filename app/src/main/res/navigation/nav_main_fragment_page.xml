@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main_fragment_page"
     app:startDestination="@id/mainPage1Fragment">
 
     <fragment
         android:id="@+id/mainPage1Fragment"
         android:name="com.cjw.demo1.navigation.MainPage1Fragment"
-        android:label="MainPage1Fragment">
+        android:label="MainPage1Fragment"
+        tools:layout="@layout/fragment_main_page1">
         <action
             android:id="@+id/action_mainPage1Fragment_to_mainPage2Fragment"
             app:destination="@id/mainPage2Fragment"
@@ -33,7 +35,8 @@
     <fragment
         android:id="@+id/mainPage2Fragment"
         android:name="com.cjw.demo1.navigation.MainPage2Fragment"
-        android:label="MainPage2Fragment">
+        android:label="MainPage2Fragment"
+        tools:layout="@layout/fragment_main_page2">
         <action
             android:id="@+id/action_mainPage2Fragment_to_mainPage3Fragment"
             app:destination="@id/mainPage3Fragment"
@@ -62,7 +65,8 @@
     <fragment
         android:id="@+id/mainPage3Fragment"
         android:name="com.cjw.demo1.navigation.MainPage3Fragment"
-        android:label="MainPage3Fragment">
+        android:label="MainPage3Fragment"
+        tools:layout="@layout/fragment_main_page3">
         <action
             android:id="@+id/action_mainPage3Fragment_to_mainPage1Fragment"
             app:destination="@id/mainPage1Fragment"
