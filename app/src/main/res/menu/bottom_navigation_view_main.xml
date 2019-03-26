@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainPage1Fragment"
+        android:icon="@android:drawable/ic_menu_call"
+        android:title="@string/menu_call" />
+    <item
+        android:id="@+id/mainPage2Fragment"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@string/menu_save" />
+    <item
+        android:id="@+id/mainPage3Fragment"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="@string/menu_camera" />
+
+</menu>

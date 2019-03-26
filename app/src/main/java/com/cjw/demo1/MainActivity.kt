@@ -7,8 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavArgument
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.cjw.demo1.lifecycle.MainLifecycleObserver
 import com.cjw.demo1.logger.Log
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,9 +23,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Lifecycle
         mMainLifecycleObserver = MainLifecycleObserver()
         lifecycle.addObserver(mMainLifecycleObserver)
 
+        // LiveData
         mActivityLiveData = MutableLiveData()
 
         // 与 Lifecycle 不同的是
@@ -44,12 +49,18 @@ class MainActivity : AppCompatActivity() {
 
         mActivityLiveData.value = "onCreate"
 
+        // Navigation
+        // Navigation 动态配置 navGraph
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fg) as NavHostFragment
         val navGraph = navHostFragment.navController.navInflater.inflate(R.navigation.nav_main_fragment_page)
 
         val navArgument = NavArgument.Builder().setDefaultValue("默认数据").build()
         navGraph.addArgument(getString(R.string.value_fragment_page1_et_text), navArgument)
         navHostFragment.navController.graph = navGraph
+
+        // Navigation 与 BottomNavigationView 联动
+        // BottomNavigationView 在布局中写的 menu 文件, 要确保 menu 里的 item id 和 navigation 里的 fragment 的 id 要一致, 不然是不起作用的
+        NavigationUI.setupWithNavController(main_menu_bnv, nav_host_fg.findNavController())
     }
 
     override fun onSupportNavigateUp(): Boolean {

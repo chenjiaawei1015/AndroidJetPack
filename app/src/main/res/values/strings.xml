@@ -20,4 +20,8 @@
     <string name="args_et_text2">args_et_text2</string>
     <string name="value_fragment_page1_et_text">value_fragment_page1_et_text</string>
 
+    <string name="menu_call">电话</string>
+    <string name="menu_save">保存</string>
+    <string name="menu_camera">相机</string>
+
 </resources>
