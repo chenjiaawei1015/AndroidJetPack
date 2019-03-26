@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(main_tb)
+
         // Lifecycle
         mMainLifecycleObserver = MainLifecycleObserver()
         lifecycle.addObserver(mMainLifecycleObserver)
@@ -60,7 +62,11 @@ class MainActivity : AppCompatActivity() {
 
         // Navigation 与 BottomNavigationView 联动
         // BottomNavigationView 在布局中写的 menu 文件, 要确保 menu 里的 item id 和 navigation 里的 fragment 的 id 要一致, 不然是不起作用的
-        NavigationUI.setupWithNavController(main_menu_bnv, nav_host_fg.findNavController())
+        val navController = nav_host_fg.findNavController()
+        NavigationUI.setupWithNavController(main_menu_bnv, navController)
+
+        // Navigation 与 ToolBar 联动
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
