@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/mainPage1Fragment"
@@ -13,5 +14,10 @@
         android:id="@+id/mainPage3Fragment"
         android:icon="@android:drawable/ic_menu_camera"
         android:title="@string/menu_camera" />
+
+    <item
+        android:id="@+id/mainPage4Fragment"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/menu_database" />
 
 </menu>

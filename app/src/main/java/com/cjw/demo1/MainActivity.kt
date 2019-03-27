@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mActivityLiveData: MutableLiveData<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.getSingleInstance().info("${javaClass.simpleName} onCreate")
+        Log.info("${javaClass.simpleName} onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         // 这个例子中, owner 为 this, 即 Activity 对象
         // 在 Activity 中, 活跃状态位于 onStart 之后, onStop 之前
         mActivityLiveData.observe(this, Observer { value ->
-            Log.getSingleInstance().info("LiveData 收到当前的状态为 $value")
+            Log.info("LiveData 收到当前的状态为 $value")
         })
 
         // 如果调用的是 observeForever, 则都会回调 Observer
@@ -76,31 +76,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        Log.getSingleInstance().info("${javaClass.simpleName} onStart")
+        Log.info("${javaClass.simpleName} onStart")
         mActivityLiveData.value = "onStart"
         super.onStart()
     }
 
     override fun onResume() {
-        Log.getSingleInstance().info("${javaClass.simpleName} onResume")
+        Log.info("${javaClass.simpleName} onResume")
         mActivityLiveData.value = "onResume"
         super.onResume()
     }
 
     override fun onPause() {
-        Log.getSingleInstance().info("${javaClass.simpleName} onPause")
+        Log.info("${javaClass.simpleName} onPause")
         mActivityLiveData.value = "onPause"
         super.onPause()
     }
 
     override fun onStop() {
-        Log.getSingleInstance().info("${javaClass.simpleName} onStop")
+        Log.info("${javaClass.simpleName} onStop")
         mActivityLiveData.value = "onStop"
         super.onStop()
     }
 
     override fun onDestroy() {
-        Log.getSingleInstance().info("${javaClass.simpleName} onDestroy")
+        Log.info("${javaClass.simpleName} onDestroy")
         mActivityLiveData.value = "onDestroy"
         super.onDestroy()
     }

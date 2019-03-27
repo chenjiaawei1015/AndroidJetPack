@@ -86,4 +86,10 @@
             app:popUpTo="@id/mainPage1Fragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/mainPage4Fragment"
+        android:name="com.cjw.demo1.navigation.MainPage4Fragment"
+        android:label="MainPage4Fragment"
+        tools:layout="@layout/fragment_main_page4" />
 </navigation>

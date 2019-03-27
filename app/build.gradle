@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -25,7 +27,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
     implementation 'androidx.core:core-ktx:1.1.0-alpha05'
@@ -37,8 +39,16 @@ dependencies {
     // logger
     implementation 'com.orhanobut:logger:2.2.0'
 
-    def lifecycle_version = "2.0.0"
+    // rxkotlin
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
 
+    // rxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    def lifecycle_version = "2.0.0"
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     // alternatively - just ViewModel
@@ -48,15 +58,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI AndroidX libraries use this lightweight import for Lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     // For Kotlin use kapt instead of annotationProcessor
     // alternately - if using Java8, use the following instead of lifecycle-compiler
-    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     // optional - ReactiveStreams support for LiveData
     // implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version" // For Kotlin use lifecycle-reactivestreams-ktx
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 
@@ -67,7 +78,22 @@ dependencies {
     // navigation
     // implementation "androidx.navigation:navigation-fragment:$nav_version" // For Kotlin use navigation-fragment-ktx
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+
     // implementation "androidx.navigation:navigation-ui:$nav_version" // For Kotlin use navigation-ui-ktx
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
+    // Room
+    def room_version = "2.1.0-alpha06"
+    implementation "androidx.room:room-runtime:$room_version"
+
+    // annotationProcessor "androidx.room:room-compiler:$room_version"  // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.room:room-compiler:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+    // optional - RxJava support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
 }

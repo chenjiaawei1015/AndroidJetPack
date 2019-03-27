@@ -23,5 +23,17 @@
     <string name="menu_call">电话</string>
     <string name="menu_save">保存</string>
     <string name="menu_camera">相机</string>
+    <string name="menu_database">数据库</string>
+
+    <string name="title_database_test">数据库测试</string>
+    <string name="id">id</string>
+    <string name="first_name">姓</string>
+    <string name="last_name">名</string>
+    <string name="card_number">身份证号码</string>
+    <string name="age">年龄</string>
+    <string name="address">地址</string>
+
+    <string name="button_add_user">添加User</string>
+    <string name="button_add_user_info">添加UserInfo</string>
 
 </resources>
