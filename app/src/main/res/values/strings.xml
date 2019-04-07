@@ -45,6 +45,7 @@
   <string name="failed">失败</string>
 
   <string name="classes_info">班级信息</string>
+  <string name="classes_database_data">班级数据 : %s</string>
   <string name="classes_operator">班级操作</string>
   <string name="classes_insert">添加班级</string>
   <string name="classes_insert_random">随机添加班级</string>
@@ -54,5 +55,9 @@
   <string name="classes_id">id</string>
   <string name="classes_name">name</string>
   <string name="classes_address">address</string>
+
+  <string name="student_info">学生信息</string>
+  <string name="student_database_data">学生数据 : %s</string>
+  <string name="student_classes_id">classes id</string>
 
 </resources>

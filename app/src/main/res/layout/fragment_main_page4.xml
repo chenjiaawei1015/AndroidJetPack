@@ -173,6 +173,36 @@
         app:layout_constraintTop_toBottomOf="@id/insert_random_classes_bt"
         />
 
+    <View
+        android:id="@+id/line3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginBottom="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_2"
+        android:background="@color/colorAccent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clear_classes_bt"
+        />
+
+    <TextView
+        android:id="@+id/student_info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/student_info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line3"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/student_rv"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_info_tv"
+        />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 

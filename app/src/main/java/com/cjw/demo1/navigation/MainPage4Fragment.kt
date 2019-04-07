@@ -12,8 +12,11 @@ import com.cjw.demo1.R
 import com.cjw.demo1.base.BaseFragment
 import com.cjw.demo1.logger.Log
 import com.cjw.demo1.navigation.adapter.ClassesAdapter
+import com.cjw.demo1.navigation.adapter.StudentAdapter
 import com.cjw.demo1.room.data.Classes
+import com.cjw.demo1.room.data.Student
 import com.cjw.demo1.room.database.AppDatabase
+import com.cjw.demo1.utils.GsonUtils
 import com.cjw.demo1.utils.RandomUtils
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,12 +31,14 @@ import kotlinx.android.synthetic.main.fragment_main_page4.insert_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_random_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.name_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.single_query_classes_bt
+import kotlinx.android.synthetic.main.fragment_main_page4.student_rv
 import kotlinx.android.synthetic.main.fragment_main_page4.update_classes_bt
 
 class MainPage4Fragment : BaseFragment() {
 
   private lateinit var mAppDatabase: AppDatabase
   private var mClassesAdapter: ClassesAdapter? = null
+  private var mStudentAdapter: StudentAdapter? = null
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -55,6 +60,7 @@ class MainPage4Fragment : BaseFragment() {
               if (it) {
                 mAppDatabase = AppDatabase.getAppDatabase(context!!)
                 queryClassesLiveData()
+                queryStudentLiveData()
               } else {
                 Log.error(getString(R.string.storage_permission_failed, ""))
               }
@@ -90,6 +96,35 @@ class MainPage4Fragment : BaseFragment() {
       insertRandomClasses()
     }
 
+  }
+
+  private fun queryStudentLiveData() {
+    mDisposable.add(
+        SingleToFlowable.fromCallable {
+          mAppDatabase.studentDao()
+              .queryLiveData()
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+              it.observe(this, Observer<List<Student>> { studentList: List<Student> ->
+                if (mStudentAdapter == null) {
+                  mStudentAdapter = StudentAdapter(studentList)
+                  mStudentAdapter!!.addHeaderView(
+                      layoutInflater.inflate(R.layout.item_student_header, null)
+                  )
+
+                  student_rv.layoutManager = LinearLayoutManager(activity)
+                  student_rv.adapter = mStudentAdapter
+                } else {
+                  mStudentAdapter!!.setNewData(studentList)
+                }
+
+                Log.debug(getString(R.string.student_database_data, GsonUtils.toJson(studentList)))
+
+              })
+            }
+    )
   }
 
   private fun deleteClasses() {
@@ -208,6 +243,8 @@ class MainPage4Fragment : BaseFragment() {
                 } else {
                   mClassesAdapter!!.setNewData(it)
                 }
+
+                Log.debug(getString(R.string.classes_database_data, GsonUtils.toJson(it)))
               })
         })
   }
