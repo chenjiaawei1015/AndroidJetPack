@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_main_page4.id_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.name_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.single_query_classes_bt
+import kotlinx.android.synthetic.main.fragment_main_page4.update_classes_bt
 
 class MainPage4Fragment : BaseFragment() {
 
@@ -76,6 +77,25 @@ class MainPage4Fragment : BaseFragment() {
       address_classes_et.setText("")
     }
 
+    update_classes_bt.setOnClickListener {
+      updateClasses()
+    }
+
+  }
+
+  private fun updateClasses() {
+    mDisposable.add(SingleToFlowable.fromCallable {
+      val classes = Classes()
+      classes.classesId = id_classes_et.text.toString()
+          .toLong()
+      classes.name = name_classes_et.text.toString()
+      classes.address = address_classes_et.text.toString()
+      mAppDatabase.classesDao()
+          .update(classes)
+    }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe())
   }
 
   private fun singleQueryClasses() {
