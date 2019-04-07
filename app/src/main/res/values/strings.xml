@@ -41,6 +41,9 @@
   <string name="clear">清空</string>
   <string name="single_query">单表查询</string>
 
+  <string name="success">成功</string>
+  <string name="failed">失败</string>
+
   <string name="classes_info">班级信息</string>
   <string name="classes_operator">班级操作</string>
   <string name="classes_insert">添加班级</string>

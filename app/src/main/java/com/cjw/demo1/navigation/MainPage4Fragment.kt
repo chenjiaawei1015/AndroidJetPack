@@ -23,6 +23,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main_page4.address_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.classes_rv
 import kotlinx.android.synthetic.main.fragment_main_page4.clear_classes_bt
+import kotlinx.android.synthetic.main.fragment_main_page4.delete_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.id_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.name_classes_et
@@ -81,6 +82,39 @@ class MainPage4Fragment : BaseFragment() {
       updateClasses()
     }
 
+    delete_classes_bt.setOnClickListener {
+      deleteClasses()
+    }
+
+  }
+
+  private fun deleteClasses() {
+    mDisposable.add(Flowable.just(id_classes_et.text.toString().toLong())
+        .map {
+          val classesList = mAppDatabase.classesDao()
+              .queryListById(listOf(it))
+
+          var deleteCount = 0
+          for (classes in classesList) {
+            val res = mAppDatabase.classesDao()
+                .delete(classes)
+            if (res > 0) {
+              deleteCount++
+            }
+          }
+
+          return@map deleteCount > 0
+        }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe {
+          if (it != null && it) {
+            Log.info(getString(R.string.success))
+          } else {
+            Log.info(getString(R.string.failed))
+          }
+        }
+    )
   }
 
   private fun updateClasses() {
