@@ -38,5 +38,7 @@
 
   <string name="database_path">数据库路径 : %s</string>
   <string name="storage_permission_failed">存储权限授权失败 : %s</string>
+  <string name="clear">清空</string>
+  <string name="single_query">单表查询</string>
 
 </resources>

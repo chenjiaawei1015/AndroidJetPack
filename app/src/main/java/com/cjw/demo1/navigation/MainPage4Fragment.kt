@@ -63,7 +63,7 @@ class MainPage4Fragment : BaseFragment() {
               }
             }, { throwable ->
               Log.error(getString(R.string.storage_permission_failed, throwable.message))
-              Log.error(throwable, throwable.message!!, "")
+              Log.error(throwable, throwable.message!!)
             })
     )
 
@@ -102,6 +102,34 @@ class MainPage4Fragment : BaseFragment() {
                 Log.debug("添加成功")
               }
       )
+    }
+
+    clear_bt.setOnClickListener {
+      first_name_et.text.clear()
+      last_name_et.text.clear()
+      card_number_et.text.clear()
+      age_et.text.clear()
+      address_et.text.clear()
+    }
+
+    single_query_bt.setOnClickListener {
+      val id = id_et.text.toString()
+          .toInt()
+
+      mDisposable.add(Flowable.just(id)
+          .map { userId ->
+            mAppDatabase.userDao()
+                .queryUserByIds(listOf(userId))
+          }
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe {
+            if (it.isNotEmpty()) {
+              first_name_et.setText(it[0].firstName)
+              last_name_et.setText(it[0].lastName)
+              card_number_et.setText(it[0].idCard)
+            }
+          })
     }
   }
 
