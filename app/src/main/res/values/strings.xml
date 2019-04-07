@@ -58,11 +58,13 @@
 
   <string name="student_info">学生信息</string>
   <string name="student_database_data">学生数据 : %s</string>
+  <string name="student_database_data2">学生多表查询数据 : %s</string>
   <string name="student_classes_id">classes id</string>
   <string name="student_operator">班级操作</string>
   <string name="student_insert">添加学生</string>
   <string name="student_update">更新学生</string>
   <string name="student_query">查询学生</string>
   <string name="student_delete">删除学生</string>
+  <string name="student_multi_query">学生,班级多表查询</string>
 
 </resources>

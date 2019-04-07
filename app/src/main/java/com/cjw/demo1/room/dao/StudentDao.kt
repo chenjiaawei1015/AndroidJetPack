@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.cjw.demo1.room.data.Student
+import com.cjw.demo1.room.data.StudentClasses
 import io.reactivex.Flowable
 
 @Dao
@@ -39,4 +40,9 @@ interface StudentDao {
 
   @Query("select * from tb_student where student_id in (:idList)")
   fun queryFlowableById(vararg idList: Int): Flowable<List<Student>>
+
+  @Query(
+      "select tb_student.student_id,tb_student.student_name,tb_classes.classes_name from tb_student,tb_classes where tb_student.classes_id = tb_classes.classes_id"
+  )
+  fun queryStudentClasses(): Flowable<List<StudentClasses>>
 }

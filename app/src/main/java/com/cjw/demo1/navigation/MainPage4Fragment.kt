@@ -33,6 +33,7 @@ import kotlinx.android.synthetic.main.fragment_main_page4.insert_random_classes_
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_student_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.name_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.name_student_et
+import kotlinx.android.synthetic.main.fragment_main_page4.query_student_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.single_query_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.student_rv
 import kotlinx.android.synthetic.main.fragment_main_page4.update_classes_bt
@@ -103,6 +104,21 @@ class MainPage4Fragment : BaseFragment() {
       insertStudent()
     }
 
+    query_student_classes_bt.setOnClickListener {
+      queryStudentClasses()
+    }
+  }
+
+  private fun queryStudentClasses() {
+    mDisposable.add(
+        mAppDatabase.studentDao()
+            .queryStudentClasses()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+              Log.debug(getString(R.string.student_database_data2, GsonUtils.toJson(it)))
+            }
+    )
   }
 
   private fun insertStudent() {
