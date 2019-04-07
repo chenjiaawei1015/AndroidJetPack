@@ -17,7 +17,7 @@ interface ClassesDao {
   fun queryList(): List<Classes>
 
   @Query("select * from tb_classes where classes_id in (:idList)")
-  fun queryListById(idList: List<Int>): List<Classes>
+  fun queryListById(idList: List<Long>): List<Classes>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insert(vararg insertClasses: Classes)

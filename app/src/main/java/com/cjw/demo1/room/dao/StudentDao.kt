@@ -1,7 +1,12 @@
 package com.cjw.demo1.room.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import com.cjw.demo1.room.data.Student
 import io.reactivex.Flowable
 
@@ -12,7 +17,7 @@ interface StudentDao {
   fun queryList(): List<Student>
 
   @Query("select * from tb_student where student_id in (:idList)")
-  fun queryListById(vararg idList: Int): List<Student>
+  fun queryListById(vararg idList: Long): List<Student>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insert(vararg student: Student)

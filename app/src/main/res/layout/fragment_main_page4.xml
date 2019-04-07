@@ -56,6 +56,93 @@
         app:layout_constraintTop_toBottomOf="@id/classes_info_tv"
         />
 
+    <View
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginBottom="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_2"
+        android:background="@color/colorAccent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classes_rv"
+        />
+
+    <TextView
+        android:id="@+id/classes_operator_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/classes_operator"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line2"
+        />
+
+    <EditText
+        android:id="@+id/id_classes_et"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:autofillHints="null"
+        android:hint="@string/classes_id"
+        android:inputType="numberSigned"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classes_operator_tv"
+        />
+
+    <EditText
+        android:id="@+id/name_classes_et"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:autofillHints="null"
+        android:hint="@string/classes_name"
+        android:inputType="text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_classes_et"
+        />
+
+    <EditText
+        android:id="@+id/address_classes_et"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:autofillHints="null"
+        android:hint="@string/classes_address"
+        android:inputType="text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_classes_et"
+        />
+
+    <Button
+        android:id="@+id/insert_classes_bt"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="@string/classes_insert"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/address_classes_et"
+        />
+
+    <Button
+        android:id="@+id/single_query_classes_bt"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="@string/classes_query"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/insert_classes_bt"
+        />
+
+    <Button
+        android:id="@+id/clear_classes_bt"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="@string/clear"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/single_query_classes_bt"
+        />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 
