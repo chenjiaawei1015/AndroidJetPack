@@ -1,39 +1,42 @@
 <resources>
-    <string name="app_name">Demo1</string>
+  <string name="app_name">Demo1</string>
 
-    <string name="title_fragment_page1">当前 Fragment1</string>
-    <string name="title_fragment_page2">当前 Fragment2</string>
-    <string name="title_fragment_page3">当前 Fragment3</string>
-    <string name="navigation_fragment_page1">跳转Fragment1</string>
-    <string name="navigation_fragment_page2">跳转Fragment2</string>
-    <string name="navigation_fragment_page3">跳转Fragment3</string>
-    <string name="navigation_fragment_back">返回上一个 Fragment</string>
-    <string name="navigation_activity_back">Activity 退出</string>
-    <string name="navigation_back_fragment_page1">回到Fragment1</string>
-    <string name="navigation_args_1">传递参数 方式1</string>
-    <string name="navigation_args_2">传递参数 方式2</string>
-    <string name="prompt_input_text">文本输入</string>
-    <string name="auto_fill_hint_fragment1_et_data">auto_fill_hint_fragment1_et_data</string>
-    <string name="auto_fill_hint_fragment2_et_data">auto_fill_hint_fragment2_et_data</string>
+  <string name="title_fragment_page1">当前 Fragment1</string>
+  <string name="title_fragment_page2">当前 Fragment2</string>
+  <string name="title_fragment_page3">当前 Fragment3</string>
+  <string name="navigation_fragment_page1">跳转Fragment1</string>
+  <string name="navigation_fragment_page2">跳转Fragment2</string>
+  <string name="navigation_fragment_page3">跳转Fragment3</string>
+  <string name="navigation_fragment_back">返回上一个 Fragment</string>
+  <string name="navigation_activity_back">Activity 退出</string>
+  <string name="navigation_back_fragment_page1">回到Fragment1</string>
+  <string name="navigation_args_1">传递参数 方式1</string>
+  <string name="navigation_args_2">传递参数 方式2</string>
+  <string name="prompt_input_text">文本输入</string>
+  <string name="auto_fill_hint_fragment1_et_data">auto_fill_hint_fragment1_et_data</string>
+  <string name="auto_fill_hint_fragment2_et_data">auto_fill_hint_fragment2_et_data</string>
 
-    <string name="args_et_text1">args_et_text1</string>
-    <string name="args_et_text2">args_et_text2</string>
-    <string name="value_fragment_page1_et_text">value_fragment_page1_et_text</string>
+  <string name="args_et_text1">args_et_text1</string>
+  <string name="args_et_text2">args_et_text2</string>
+  <string name="value_fragment_page1_et_text">value_fragment_page1_et_text</string>
 
-    <string name="menu_call">电话</string>
-    <string name="menu_save">保存</string>
-    <string name="menu_camera">相机</string>
-    <string name="menu_database">数据库</string>
+  <string name="menu_call">电话</string>
+  <string name="menu_save">保存</string>
+  <string name="menu_camera">相机</string>
+  <string name="menu_database">数据库</string>
 
-    <string name="title_database_test">数据库测试</string>
-    <string name="id">id</string>
-    <string name="first_name">姓</string>
-    <string name="last_name">名</string>
-    <string name="card_number">身份证号码</string>
-    <string name="age">年龄</string>
-    <string name="address">地址</string>
+  <string name="title_database_test">数据库测试</string>
+  <string name="id">id</string>
+  <string name="first_name">姓</string>
+  <string name="last_name">名</string>
+  <string name="card_number">身份证号码</string>
+  <string name="age">年龄</string>
+  <string name="address">地址</string>
 
-    <string name="button_add_user">添加User</string>
-    <string name="button_add_user_info">添加UserInfo</string>
+  <string name="button_add_user">添加User</string>
+  <string name="button_add_user_info">添加UserInfo</string>
+
+  <string name="database_path">数据库路径 : %s</string>
+  <string name="storage_permission_failed">存储权限授权失败 : %s</string>
 
 </resources>
