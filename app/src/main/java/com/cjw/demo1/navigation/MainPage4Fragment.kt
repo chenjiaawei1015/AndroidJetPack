@@ -23,13 +23,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.operators.single.SingleToFlowable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main_page4.address_classes_et
+import kotlinx.android.synthetic.main.fragment_main_page4.classes_id_student_et
 import kotlinx.android.synthetic.main.fragment_main_page4.classes_rv
 import kotlinx.android.synthetic.main.fragment_main_page4.clear_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.delete_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.id_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_random_classes_bt
+import kotlinx.android.synthetic.main.fragment_main_page4.insert_student_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.name_classes_et
+import kotlinx.android.synthetic.main.fragment_main_page4.name_student_et
 import kotlinx.android.synthetic.main.fragment_main_page4.single_query_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.student_rv
 import kotlinx.android.synthetic.main.fragment_main_page4.update_classes_bt
@@ -96,6 +99,26 @@ class MainPage4Fragment : BaseFragment() {
       insertRandomClasses()
     }
 
+    insert_student_bt.setOnClickListener {
+      insertStudent()
+    }
+
+  }
+
+  private fun insertStudent() {
+    mDisposable.add(
+        SingleToFlowable.fromCallable {
+          val student = Student()
+          student.studentName = name_student_et.text.toString()
+          student.classesId = classes_id_student_et.text.toString()
+              .toLong()
+          mAppDatabase.studentDao()
+              .insert(student)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+    )
   }
 
   private fun queryStudentLiveData() {

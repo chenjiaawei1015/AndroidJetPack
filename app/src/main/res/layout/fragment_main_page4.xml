@@ -203,6 +203,73 @@
         app:layout_constraintTop_toBottomOf="@id/student_info_tv"
         />
 
+    <View
+        android:id="@+id/line4"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginBottom="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_2"
+        android:background="@color/colorAccent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_rv"
+        />
+
+    <TextView
+        android:id="@+id/student_operator_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/classes_operator"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line4"
+        />
+
+    <EditText
+        android:id="@+id/id_student_et"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:autofillHints="null"
+        android:hint="@string/classes_id"
+        android:inputType="numberSigned"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_operator_tv"
+        />
+
+    <EditText
+        android:id="@+id/name_student_et"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:autofillHints="null"
+        android:hint="@string/classes_name"
+        android:inputType="text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_student_et"
+        />
+
+    <EditText
+        android:id="@+id/classes_id_student_et"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:autofillHints="null"
+        android:hint="@string/student_classes_id"
+        android:inputType="numberSigned"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_student_et"
+        />
+
+    <Button
+        android:id="@+id/insert_student_bt"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="@string/student_insert"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classes_id_student_et"
+        />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 
