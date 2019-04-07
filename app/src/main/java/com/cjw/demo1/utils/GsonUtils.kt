@@ -1,6 +1,7 @@
 package com.cjw.demo1.utils
 
 import com.google.gson.Gson
+import java.net.URLEncoder
 
 class GsonUtils {
 
@@ -8,7 +9,7 @@ class GsonUtils {
 
     fun toJson(obj: Any): String {
       val gson = Gson()
-      return gson.toJson(obj)
+      return URLEncoder.encode(gson.toJson(obj), "utf-8")
     }
   }
 }

@@ -4,18 +4,24 @@ import java.security.SecureRandom
 
 object RandomUtils : SecureRandom() {
 
-    private val random: SecureRandom by lazy {
-        SecureRandom()
-    }
+  private val random: SecureRandom by lazy {
+    SecureRandom()
+  }
 
-    fun nextString(length: Int): String {
-        val dataArr = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()[]{}-=_+;':\"<>,./?\\"
+  fun nextString(length: Int): String {
+    val dataArr =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()[]{}-=_+;':\"<>,./?\\"
 
-        val builder = StringBuilder()
-        for (index in 0..length) {
-            builder.append(dataArr[nextInt(dataArr.length)])
-        }
-        return builder.toString()
+    val builder = StringBuilder()
+    for (index in 0 until length) {
+      builder.append(dataArr[nextInt(dataArr.length)])
     }
+    return builder.toString()
+  }
+
+  fun nextInt(
+    start: Int,
+    end: Int
+  ) = start + nextInt(end - start + 1)
 
 }

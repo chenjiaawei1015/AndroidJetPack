@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.cjw.demo1.R
 import com.cjw.demo1.base.BaseFragment
 import com.cjw.demo1.logger.Log
 import com.cjw.demo1.navigation.adapter.ClassesAdapter
 import com.cjw.demo1.room.data.Classes
 import com.cjw.demo1.room.database.AppDatabase
-import com.cjw.demo1.utils.GsonUtils
+import com.cjw.demo1.utils.RandomUtils
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.operators.single.SingleToFlowable
@@ -26,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_main_page4.clear_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.delete_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.id_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_classes_bt
+import kotlinx.android.synthetic.main.fragment_main_page4.insert_random_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.name_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.single_query_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.update_classes_bt
@@ -84,6 +84,10 @@ class MainPage4Fragment : BaseFragment() {
 
     delete_classes_bt.setOnClickListener {
       deleteClasses()
+    }
+
+    insert_random_classes_bt.setOnClickListener {
+      insertRandomClasses()
     }
 
   }
@@ -150,6 +154,25 @@ class MainPage4Fragment : BaseFragment() {
     )
   }
 
+  private fun insertRandomClasses() {
+    mDisposable.add(SingleToFlowable.fromCallable {
+
+      val classesList = mutableListOf<Classes>()
+      for (index in 0..RandomUtils.nextInt(1, 5)) {
+        val classes = Classes()
+        classes.name = RandomUtils.nextString(6)
+        classes.address = RandomUtils.nextString(10)
+        classesList.add(classes)
+      }
+
+      mAppDatabase.classesDao()
+          .insert(*classesList.toTypedArray())
+    }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe())
+  }
+
   private fun insertClasses() {
     mDisposable.add(SingleToFlowable.fromCallable {
       val classes = Classes()
@@ -180,15 +203,11 @@ class MainPage4Fragment : BaseFragment() {
                       layoutInflater.inflate(R.layout.item_classes_header, null)
                   )
 
-                  classes_rv.layoutManager =
-                    LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-
+                  classes_rv.layoutManager = LinearLayoutManager(activity)
                   classes_rv.adapter = mClassesAdapter
                 } else {
                   mClassesAdapter!!.setNewData(it)
                 }
-
-                Log.debug(GsonUtils.toJson(it))
               })
         })
   }

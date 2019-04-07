@@ -47,6 +47,7 @@
   <string name="classes_info">班级信息</string>
   <string name="classes_operator">班级操作</string>
   <string name="classes_insert">添加班级</string>
+  <string name="classes_insert_random">随机添加班级</string>
   <string name="classes_update">更新班级</string>
   <string name="classes_query">查询班级</string>
   <string name="classes_delete">删除班级</string>
