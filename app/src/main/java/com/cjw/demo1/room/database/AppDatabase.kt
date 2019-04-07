@@ -1,21 +1,20 @@
 package com.cjw.demo1.room.database
 
 import android.content.Context
-import android.os.Environment
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.cjw.demo1.R
 import com.cjw.demo1.logger.Log
-import com.cjw.demo1.room.dao.UserDao
-import com.cjw.demo1.room.dao.UserInfoDao
-import com.cjw.demo1.room.data.User
-import com.cjw.demo1.room.data.UserInfo
+import com.cjw.demo1.room.dao.ClassesDao
+import com.cjw.demo1.room.dao.StudentDao
+import com.cjw.demo1.room.data.Classes
+import com.cjw.demo1.room.data.Student
 import java.io.File
 
 @Database(
     entities = [
-      User::class, UserInfo::class
+      Classes::class, Student::class
     ],
     version = 1,
     exportSchema = false
@@ -47,8 +46,8 @@ abstract class AppDatabase : RoomDatabase() {
     }
   }
 
-  abstract fun userDao(): UserDao
+  abstract fun classesDao(): ClassesDao
 
-  abstract fun userInfoDao(): UserInfoDao
+  abstract fun studentDao(): StudentDao
 
 }

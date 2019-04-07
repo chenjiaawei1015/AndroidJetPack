@@ -41,4 +41,9 @@
   <string name="clear">清空</string>
   <string name="single_query">单表查询</string>
 
+  <string name="classes_info">班级信息</string>
+  <string name="classes_id">id</string>
+  <string name="classes_name">name</string>
+  <string name="classes_address">address</string>
+
 </resources>

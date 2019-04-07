@@ -1,132 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/dp_5"
-    android:paddingRight="@dimen/dp_5"
     >
 
-  <TextView
-      android:id="@+id/title_tv"
-      android:layout_width="wrap_content"
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/title_database_test"
-      android:textSize="@dimen/sp_20"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_chainStyle="packed"
-      />
+      android:orientation="vertical"
+      android:paddingLeft="@dimen/dp_5"
+      android:paddingRight="@dimen/dp_5"
+      >
 
-  <EditText
-      android:id="@+id/id_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/id"
-      android:inputType="text"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/title_tv"
-      />
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_database_test"
+        android:textSize="@dimen/sp_20"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        />
 
-  <EditText
-      android:id="@+id/first_name_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/first_name"
-      android:inputType="text"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/id_et"
-      />
+    <View
+        android:id="@+id/line1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginBottom="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_2"
+        android:background="@color/colorAccent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        />
 
-  <EditText
-      android:id="@+id/last_name_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/last_name"
-      android:inputType="text"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/first_name_et"
-      />
+    <TextView
+        android:id="@+id/classes_info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/classes_info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        />
 
-  <EditText
-      android:id="@+id/card_number_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/card_number"
-      android:inputType="text"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/last_name_et"
-      />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/classes_rv"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classes_info_tv"
+        />
 
-  <EditText
-      android:id="@+id/age_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/age"
-      android:inputType="text"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/card_number_et"
-      />
-
-  <EditText
-      android:id="@+id/address_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/address"
-      android:inputType="text"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/age_et"
-      />
-
-  <Button
-      android:id="@+id/add_user_bt"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="@string/button_add_user"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toLeftOf="@id/add_user_info_bt"
-      app:layout_constraintTop_toBottomOf="@id/address_et"
-      style="@style/CommonButtonStyle"
-      />
-
-  <Button
-      android:id="@+id/add_user_info_bt"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="@string/button_add_user_info"
-      app:layout_constraintLeft_toRightOf="@id/add_user_bt"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/address_et"
-      style="@style/CommonButtonStyle"
-      />
-
-  <Button
-      android:id="@+id/clear_bt"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="@string/clear"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/add_user_bt"
-      />
-
-  <Button
-      android:id="@+id/single_query_bt"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="@string/single_query"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/clear_bt"
-      />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

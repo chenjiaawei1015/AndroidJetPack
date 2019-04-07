@@ -10,20 +10,19 @@ import androidx.lifecycle.Observer
 import com.cjw.demo1.R
 import com.cjw.demo1.base.BaseFragment
 import com.cjw.demo1.logger.Log
-import com.cjw.demo1.room.data.User
-import com.cjw.demo1.room.data.UserInfo
+import com.cjw.demo1.navigation.adapter.ClassesAdapter
+import com.cjw.demo1.room.data.Classes
 import com.cjw.demo1.room.database.AppDatabase
-import com.google.gson.Gson
-import io.reactivex.Flowable
+import com.cjw.demo1.utils.GsonUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.internal.operators.single.SingleToFlowable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_main_page4.*
+import kotlinx.android.synthetic.main.fragment_main_page4.classes_rv
 
 class MainPage4Fragment : BaseFragment() {
 
   private lateinit var mAppDatabase: AppDatabase
+  private var mClassesAdapter: ClassesAdapter? = null
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -44,20 +43,7 @@ class MainPage4Fragment : BaseFragment() {
             .subscribe({
               if (it) {
                 mAppDatabase = AppDatabase.getAppDatabase(context!!)
-
-                mDisposable.add(
-                    SingleToFlowable.fromCallable {
-                      mAppDatabase.userDao()
-                          .queryAllUserByLiveData()
-                    }
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { data: LiveData<List<User>> ->
-                          data.observe(this, Observer { userList: List<User> ->
-                            Log.debug(Gson().toJson(userList))
-                          })
-                        }
-                )
+                queryLiveData()
               } else {
                 Log.error(getString(R.string.storage_permission_failed, ""))
               }
@@ -67,81 +53,32 @@ class MainPage4Fragment : BaseFragment() {
             })
     )
 
-    add_user_bt.setOnClickListener {
-      val user = User()
-      user.firstName = first_name_et.text.toString()
-      user.lastName = last_name_et.text.toString()
-      user.idCard = card_number_et.text.toString()
-
-      mDisposable.add(
-          SingleToFlowable.fromCallable {
-            mAppDatabase.userDao()
-                .insertUser(user)
-          }.subscribeOn(Schedulers.io())
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribe {
-                Log.debug("添加成功")
-              }
-      )
-    }
-
-    add_user_info_bt.setOnClickListener {
-      val userInfo = UserInfo()
-      userInfo.userId = id_et.text.toString()
-          .toLong()
-      userInfo.address = address_et.text.toString()
-      Flowable.just(userInfo)
-
-      mDisposable.add(
-          SingleToFlowable.fromCallable {
-            mAppDatabase.userInfoDao()
-                .insertUserInfo(userInfo)
-          }.subscribeOn(Schedulers.io())
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribe {
-                Log.debug("添加成功")
-              }
-      )
-    }
-
-    clear_bt.setOnClickListener {
-      first_name_et.text.clear()
-      last_name_et.text.clear()
-      card_number_et.text.clear()
-      age_et.text.clear()
-      address_et.text.clear()
-    }
-
-    single_query_bt.setOnClickListener {
-      val id = id_et.text.toString()
-          .toInt()
-
-      mDisposable.add(Flowable.just(id)
-          .map { userId ->
-            mAppDatabase.userDao()
-                .queryUserByIds(listOf(userId))
-          }
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread())
-          .subscribe {
-            if (it.isNotEmpty()) {
-              first_name_et.setText(it[0].firstName)
-              last_name_et.setText(it[0].lastName)
-              card_number_et.setText(it[0].idCard)
-            }
-          })
-    }
   }
 
-  private fun queryAllUser() {
-    mDisposable.add(
-        mAppDatabase.userDao().queryAllUserByRx()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { data: List<User> ->
-              Log.debug(data)
-            }
-    )
+  private fun queryLiveData() {
+    mDisposable.add(SingleToFlowable.fromCallable {
+      mAppDatabase.classesDao()
+          .queryLiveData()
+    }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe { liveData: LiveData<List<Classes>> ->
+          liveData.observe(this,
+              Observer<List<Classes>> {
+                if (mClassesAdapter == null) {
+                  mClassesAdapter = ClassesAdapter(it)
+                  mClassesAdapter!!.addHeaderView(
+                      layoutInflater.inflate(R.layout.item_classes_header, null)
+                  )
+
+                  classes_rv.adapter = mClassesAdapter
+                } else {
+                  mClassesAdapter!!.setNewData(it)
+                }
+
+                Log.debug(GsonUtils.toJson(it))
+              })
+        })
   }
 
 }
