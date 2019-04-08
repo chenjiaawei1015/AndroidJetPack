@@ -10,11 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cjw.demo1.R
 import com.cjw.demo1.base.BaseFragment
+import com.cjw.demo1.bean.TeacherClassesBean
 import com.cjw.demo1.logger.Log
 import com.cjw.demo1.navigation.adapter.ClassesAdapter
 import com.cjw.demo1.navigation.adapter.StudentAdapter
+import com.cjw.demo1.navigation.adapter.TeacherAdapter
 import com.cjw.demo1.room.data.Classes
 import com.cjw.demo1.room.data.Student
+import com.cjw.demo1.room.data.Teacher
+import com.cjw.demo1.room.data.TeacherClasses
 import com.cjw.demo1.room.database.AppDatabase
 import com.cjw.demo1.utils.GsonUtils
 import com.cjw.demo1.utils.RandomUtils
@@ -24,6 +28,7 @@ import io.reactivex.internal.operators.single.SingleToFlowable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main_page4.address_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.classes_id_student_et
+import kotlinx.android.synthetic.main.fragment_main_page4.classes_id_teacher_et
 import kotlinx.android.synthetic.main.fragment_main_page4.classes_rv
 import kotlinx.android.synthetic.main.fragment_main_page4.clear_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.delete_classes_bt
@@ -31,11 +36,14 @@ import kotlinx.android.synthetic.main.fragment_main_page4.id_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_random_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.insert_student_bt
+import kotlinx.android.synthetic.main.fragment_main_page4.insert_teacher_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.name_classes_et
 import kotlinx.android.synthetic.main.fragment_main_page4.name_student_et
+import kotlinx.android.synthetic.main.fragment_main_page4.name_teacher_et
 import kotlinx.android.synthetic.main.fragment_main_page4.query_student_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.single_query_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.student_rv
+import kotlinx.android.synthetic.main.fragment_main_page4.teacher_rv
 import kotlinx.android.synthetic.main.fragment_main_page4.update_classes_bt
 
 class MainPage4Fragment : BaseFragment() {
@@ -43,6 +51,7 @@ class MainPage4Fragment : BaseFragment() {
   private lateinit var mAppDatabase: AppDatabase
   private var mClassesAdapter: ClassesAdapter? = null
   private var mStudentAdapter: StudentAdapter? = null
+  private var mTeacherAdapter: TeacherAdapter? = null
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -65,6 +74,7 @@ class MainPage4Fragment : BaseFragment() {
                 mAppDatabase = AppDatabase.getAppDatabase(context!!)
                 queryClassesLiveData()
                 queryStudentLiveData()
+                queryTeacher()
               } else {
                 Log.error(getString(R.string.storage_permission_failed, ""))
               }
@@ -107,6 +117,117 @@ class MainPage4Fragment : BaseFragment() {
     query_student_classes_bt.setOnClickListener {
       queryStudentClasses()
     }
+
+    insert_teacher_bt.setOnClickListener {
+      insertTeacher()
+    }
+  }
+
+  private fun insertTeacher() {
+    mDisposable.add(
+        SingleToFlowable.fromCallable {
+          val teacher = Teacher()
+          teacher.teacherName = name_teacher_et.text.toString()
+          val insertRowIdList = mAppDatabase.teacherDao()
+              .insert(teacher)
+          if (insertRowIdList.isNullOrEmpty()) {
+            return@fromCallable false
+          }
+
+          val insertTeacher = mAppDatabase.teacherDao()
+              .query(insertRowIdList[0])
+
+          val classesIdList = classes_id_teacher_et.text.toString()
+              .split(" ")
+              .toList()
+
+          val teacherClassesList = mutableListOf<TeacherClasses>()
+          for (item in classesIdList) {
+            val teacherClasses = TeacherClasses()
+            teacherClasses.classesId = item.toLong()
+            teacherClasses.teacherId = insertTeacher.teacherId
+            teacherClassesList.add(teacherClasses)
+          }
+
+          val insertList = mAppDatabase.teacherClassesDao()
+              .insert(*teacherClassesList.toTypedArray())
+          return@fromCallable insertList.isNotEmpty()
+
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+              if (it) {
+                Log.debug(getString(R.string.success))
+                queryTeacher()
+              } else {
+                Log.debug(getString(R.string.failed))
+              }
+            }
+    )
+  }
+
+  private fun queryTeacher() {
+    mDisposable.add(
+        SingleToFlowable.fromCallable {
+          val teacherList = mAppDatabase.teacherDao()
+              .queryList()
+          val classesList = mAppDatabase.classesDao()
+              .queryList()
+          val teacherClassesList = mAppDatabase.teacherClassesDao()
+              .queryList()
+
+          val teacherClassesBeanList = mutableListOf<TeacherClassesBean>()
+          for (item_teacher in teacherList) {
+            val teacherClassesBean = TeacherClassesBean()
+            teacherClassesBean.teacher = item_teacher
+            teacherClassesBean.classesList = arrayListOf()
+
+            for (item_teacher_classes in teacherClassesList) {
+              if (item_teacher_classes.teacherId == item_teacher.teacherId) {
+                val findClasses = findClassesById(classesList, item_teacher_classes.classesId)
+                if (findClasses != null) {
+                  teacherClassesBean.classesList!!.add(findClasses)
+                }
+              }
+            }
+
+            teacherClassesBeanList.add(teacherClassesBean)
+          }
+
+          return@fromCallable teacherClassesBeanList
+
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+              if (mTeacherAdapter == null) {
+                mTeacherAdapter = TeacherAdapter(it)
+
+                mTeacherAdapter!!.addHeaderView(
+                    layoutInflater.inflate(R.layout.item_teacher_header, null)
+                )
+
+                teacher_rv.layoutManager = LinearLayoutManager(activity)
+                teacher_rv.adapter = mTeacherAdapter
+              } else {
+                mTeacherAdapter!!.setNewData(it)
+              }
+              Log.debug(getString(R.string.teacher_database_data, GsonUtils.toJson(it)))
+            }
+    )
+  }
+
+  private fun findClassesById(
+    classesList: List<Classes>,
+    id: Long
+  ): Classes? {
+    for (item in classesList) {
+      if (id == item.classesId) {
+        return item
+      }
+    }
+    return null
   }
 
   private fun queryStudentClasses() {

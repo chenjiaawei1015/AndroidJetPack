@@ -8,13 +8,17 @@ import com.cjw.demo1.R
 import com.cjw.demo1.logger.Log
 import com.cjw.demo1.room.dao.ClassesDao
 import com.cjw.demo1.room.dao.StudentDao
+import com.cjw.demo1.room.dao.TeacherClassesDao
+import com.cjw.demo1.room.dao.TeacherDao
 import com.cjw.demo1.room.data.Classes
 import com.cjw.demo1.room.data.Student
+import com.cjw.demo1.room.data.Teacher
+import com.cjw.demo1.room.data.TeacherClasses
 import java.io.File
 
 @Database(
     entities = [
-      Classes::class, Student::class
+      Classes::class, Student::class, Teacher::class, TeacherClasses::class
     ],
     version = 1,
     exportSchema = false
@@ -49,5 +53,9 @@ abstract class AppDatabase : RoomDatabase() {
   abstract fun classesDao(): ClassesDao
 
   abstract fun studentDao(): StudentDao
+
+  abstract fun teacherDao(): TeacherDao
+
+  abstract fun teacherClassesDao(): TeacherClassesDao
 
 }
