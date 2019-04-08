@@ -19,7 +19,6 @@ object Log {
         Logger.i(message, args)
       }
     } catch (ex: Exception) {
-      ex.printStackTrace()
       printMessageBySystem(message)
     }
   }
@@ -28,7 +27,7 @@ object Log {
     try {
       Logger.d(obj)
     } catch (ex: Exception) {
-      ex.printStackTrace()
+      printMessageBySystem(obj.toString())
     }
   }
 
@@ -41,7 +40,6 @@ object Log {
         Logger.d(message, args)
       }
     } catch (ex: Exception) {
-      ex.printStackTrace()
       printMessageBySystem(message)
     }
   }
@@ -55,7 +53,6 @@ object Log {
         Logger.e(message, args)
       }
     } catch (ex: Exception) {
-      ex.printStackTrace()
       printMessageBySystem(message)
     }
   }
@@ -70,7 +67,6 @@ object Log {
         Logger.e(throwable, message, args)
       }
     } catch (ex: Exception) {
-      ex.printStackTrace()
       printMessageBySystem(message)
     }
   }
@@ -84,7 +80,6 @@ object Log {
         Logger.w(message, args)
       }
     } catch (ex: Exception) {
-      ex.printStackTrace()
       printMessageBySystem(message)
     }
   }
@@ -98,7 +93,6 @@ object Log {
         Logger.v(message, args)
       }
     } catch (ex: Exception) {
-      ex.printStackTrace()
       printMessageBySystem(message)
     }
   }

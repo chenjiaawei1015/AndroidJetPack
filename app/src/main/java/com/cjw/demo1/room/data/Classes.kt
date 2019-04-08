@@ -17,4 +17,12 @@ class Classes {
 
   @Ignore
   var address: String = ""
+
+  // v2 版本打开
+  @ColumnInfo(name = "width")
+  var width: Int? = 0
+
+  // v3 版本打开
+  @ColumnInfo(name = "height")
+  var height: Int? = 0
 }

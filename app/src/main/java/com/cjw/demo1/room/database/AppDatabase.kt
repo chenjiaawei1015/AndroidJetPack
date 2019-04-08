@@ -16,13 +16,14 @@ import com.cjw.demo1.room.data.Classes
 import com.cjw.demo1.room.data.Student
 import com.cjw.demo1.room.data.Teacher
 import com.cjw.demo1.room.data.TeacherClasses
+import com.cjw.demo1.room.migration.Migations
 import java.io.File
 
 @Database(
     entities = [
       Classes::class, Student::class, Teacher::class, TeacherClasses::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(DateTypeConverter::class)
@@ -46,6 +47,7 @@ abstract class AppDatabase : RoomDatabase() {
           database = Room.databaseBuilder(
               context.applicationContext, AppDatabase::class.java, dbFile.absolutePath
           )
+              .addMigrations(Migations.migration_1_2, Migations.migration_2_3)
               .build()
         }
       }
