@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.cjw.demo1.R
 import com.cjw.demo1.logger.Log
+import com.cjw.demo1.room.converter.DateTypeConverter
 import com.cjw.demo1.room.dao.ClassesDao
 import com.cjw.demo1.room.dao.StudentDao
 import com.cjw.demo1.room.dao.TeacherClassesDao
@@ -23,6 +25,7 @@ import java.io.File
     version = 1,
     exportSchema = false
 )
+@TypeConverters(DateTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
   companion object {
