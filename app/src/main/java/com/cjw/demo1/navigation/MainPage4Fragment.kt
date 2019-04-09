@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cjw.demo1.R
+import com.cjw.demo1.R.string
 import com.cjw.demo1.base.BaseFragment
 import com.cjw.demo1.bean.TeacherClassesBean
 import com.cjw.demo1.logger.Log
@@ -44,6 +45,7 @@ import kotlinx.android.synthetic.main.fragment_main_page4.query_student_classes_
 import kotlinx.android.synthetic.main.fragment_main_page4.single_query_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.student_rv
 import kotlinx.android.synthetic.main.fragment_main_page4.teacher_rv
+import kotlinx.android.synthetic.main.fragment_main_page4.transaction_classes_bt
 import kotlinx.android.synthetic.main.fragment_main_page4.update_classes_bt
 
 class MainPage4Fragment : BaseFragment() {
@@ -108,6 +110,10 @@ class MainPage4Fragment : BaseFragment() {
 
     insert_random_classes_bt.setOnClickListener {
       insertRandomClasses()
+    }
+
+    transaction_classes_bt.setOnClickListener {
+      insertClassesForTransation()
     }
 
     insert_student_bt.setOnClickListener {
@@ -346,6 +352,31 @@ class MainPage4Fragment : BaseFragment() {
                 address_classes_et.setText(firstClasses.address)
               }
             }
+    )
+  }
+
+  private fun insertClassesForTransation() {
+    val classes = Classes()
+    classes.name = RandomUtils.nextString(4)
+    classes.address = RandomUtils.nextString(10)
+    classes.height = RandomUtils.nextInt(1, 100)
+    classes.width = RandomUtils.nextInt(1, 100)
+    Log.debug(GsonUtils.toJson(classes))
+
+    mDisposable.add(
+        Flowable.just(classes)
+            .map {
+              mAppDatabase.classesDao()
+                  .queryInsert(classes)
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { Log.debug(getString(R.string.success)) },
+                {
+                  Log.debug(getString(string.failed))
+                  Log.error(it, it.message)
+                })
     )
   }
 

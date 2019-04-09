@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.cjw.demo1.room.data.Classes
 import io.reactivex.Flowable
@@ -46,5 +47,13 @@ interface ClassesDao {
 
   @Query("select * from tb_classes where classes_id in (:idList)")
   fun queryFlowableById(idList: List<Int>): Flowable<List<Classes>>
+
+  // 事务
+  @Transaction
+  fun queryInsert(vararg insertClasses: Classes): List<Classes> {
+    insert(*insertClasses)
+    val errorData = 1 / 0
+    return queryList()
+  }
 
 }

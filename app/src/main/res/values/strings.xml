@@ -40,6 +40,7 @@
   <string name="storage_permission_failed">存储权限授权失败 : %s</string>
   <string name="clear">清空</string>
   <string name="single_query">单表查询</string>
+  <string name="transaction">事务</string>
 
   <string name="success">成功</string>
   <string name="failed">失败</string>

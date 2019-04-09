@@ -164,13 +164,23 @@
         />
 
     <Button
+        android:id="@+id/transaction_classes_bt"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="@string/transaction"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/insert_random_classes_bt"
+        />
+
+    <Button
         android:id="@+id/clear_classes_bt"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:text="@string/clear"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/insert_random_classes_bt"
+        app:layout_constraintTop_toBottomOf="@id/transaction_classes_bt"
         />
 
     <View
