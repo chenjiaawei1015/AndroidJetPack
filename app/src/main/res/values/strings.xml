@@ -77,4 +77,6 @@
   <string name="teacher_query">查询教师</string>
   <string name="teacher_delete">删除教师</string>
 
+  <string name="view_model">View Model</string>
+
 </resources>
