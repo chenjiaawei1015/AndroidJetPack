@@ -4,10 +4,6 @@ import java.security.SecureRandom
 
 object RandomUtils : SecureRandom() {
 
-  private val random: SecureRandom by lazy {
-    SecureRandom()
-  }
-
   fun nextString(length: Int): String {
     val dataArr =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()[]{}-=_+;':\"<>,./?\\"
