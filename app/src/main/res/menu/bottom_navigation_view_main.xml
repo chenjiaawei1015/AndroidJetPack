@@ -22,6 +22,11 @@
   <item
       android:id="@+id/mainPage5Fragment"
       android:icon="@android:drawable/ic_menu_add"
-      android:title="@string/view_model"/>
+      android:title="@string/view_model_fragment5"/>
+
+  <item
+      android:id="@+id/mainPage6Fragment"
+      android:icon="@android:drawable/ic_menu_add"
+      android:title="@string/view_model_fragment6"/>
 
 </menu>

@@ -30,6 +30,12 @@
         android:defaultValue=" "
         app:argType="string"
         app:nullable="true"/>
+    <action
+        android:id="@+id/action_mainPage1Fragment_to_mainPage5Fragment"
+        app:destination="@id/mainPage5Fragment"/>
+    <action
+        android:id="@+id/action_mainPage1Fragment_to_mainPage6Fragment"
+        app:destination="@id/mainPage6Fragment"/>
   </fragment>
 
   <fragment
@@ -97,6 +103,20 @@
       android:id="@+id/mainPage5Fragment"
       android:name="com.cjw.demo1.navigation.MainPage5Fragment"
       android:label="MainPage5Fragment"
-      tools:layout="@layout/fragment_main_page5"/>
+      tools:layout="@layout/fragment_main_page5">
+    <action
+        android:id="@+id/action_mainPage5Fragment_to_mainPage6Fragment"
+        app:destination="@id/mainPage6Fragment"/>
+  </fragment>
+
+  <fragment
+      android:id="@+id/mainPage6Fragment"
+      android:name="com.cjw.demo1.navigation.MainPage6Fragment"
+      android:label="MainPage6Fragment"
+      tools:layout="@layout/fragment_main_page6">
+    <action
+        android:id="@+id/action_mainPage6Fragment_to_mainPage5Fragment"
+        app:destination="@id/mainPage5Fragment"/>
+  </fragment>
 
 </navigation>
