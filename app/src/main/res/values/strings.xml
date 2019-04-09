@@ -78,5 +78,10 @@
   <string name="teacher_delete">删除教师</string>
 
   <string name="view_model">View Model</string>
+  <string name="view_model_page_random_number">随机数为 %d</string>
+  <string name="generate_new_random_number">生成新随机数</string>
+  <string name="generate_new_random_number_data">生成新随机数 %d</string>
+  <string name="get_random_number_data">获取随机数 %d</string>
+  <string name="view_model_clear">View Model Clear</string>
 
 </resources>
